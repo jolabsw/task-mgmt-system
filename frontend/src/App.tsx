@@ -1,34 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
+import useHttp from "./hooks/use-http"
+import type { Tasks } from "./types/tasks"
+
+import Header from "./components/Header/header"
+import TasksList from "./components/Tasks/TaskList"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState<Tasks[]>([])
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp<Tasks[]>()
+
+  useEffect(() => {
+    const assignTasks = (taskData: Tasks[]) => {
+      setTasks(taskData)
+    }
+
+    fetchTasks({
+      url: "http://localhost:8000/api/v1/tasks"
+    }, assignTasks)
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main>
+      <Header />
+      <section>
+        <h2>Add New Task</h2>
+        <form>
+          <div>
+            <label htmlFor="title">Title:</label>
+            <input id="title" type="text" placeholder="Wiping of floor" />
+          </div>
+          <div>
+            <label htmlFor="description">Description:</label>
+            <textarea id="description"></textarea>
+          </div>
+          <div>
+            <label htmlFor="status">Status:</label>
+            <select id="status">
+              <option value="pending">Pending</option>
+              <option value="in progress">In Progress</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+          <button>Add Task</button>
+        </form>
+      </section>
+      
+      <TasksList tasks={tasks} />
+    </main>
   )
 }
 
