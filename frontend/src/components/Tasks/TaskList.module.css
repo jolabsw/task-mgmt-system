@@ -36,8 +36,32 @@
 }
 
 .task-list .task-list-item > h3 {
+    display: flex;
     margin: 0.188rem 0;
     font-size: 0.75rem;
+}
+
+.task-list .task-list-item .badge {
+    margin-right: 0.313rem;
+    padding: 0.188rem 0.313rem;
+    border-radius: 1.25rem;
+    font-size: 0.5rem;
+    font-weight: 400;
+    color: #fffdf7;
+    background-color: #9f8170;
+}
+
+.task-list .task-list-item .badge.badge-completed {
+    background-color: #8cbed6;
+}
+
+.task-list .task-list-item .badge.badge-inprogress {
+    background-color: #483c32;
+}
+
+.task-list .task-list-item .badge.badge-pending {
+    color: #483c32;
+    background-color: #efdfbb;
 }
 
 .task-list .task-list-item p {

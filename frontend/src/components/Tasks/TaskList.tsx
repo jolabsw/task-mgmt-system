@@ -4,6 +4,8 @@ import DeleteTaskModal from "./DeleteTaskModal"
 import EditTaskModal from "./EditTaskModal"
 
 import styles from "./TaskList.module.css"
+import Spinner from "../UI/Spinner"
+import { capitalizeFirstLetter } from "../../utils/utils"
 
 interface TasksProps {
     tasks: Task[]
@@ -45,15 +47,17 @@ const TasksList = ({ tasks, isLoading, error, onUpdateTask, onDeleteTask }: Task
         });
     }, [tasks, debouncedTerm]);
 
-    let taskList = <h2>No tasks at the moment. Start adding some tasks!</h2>
-
+    let taskList
     if (filteredTasks.length > 0) {
         taskList = (
             <article>
                 {filteredTasks.map(task => (
                     <div key={task.id} className={styles["task-list-item"]}>
                         <h3>
-                            <span>{task.status}</span>
+                            <span 
+                                className={`${styles.badge} ${styles[`badge-${task.status.replace(/\s+/g, '')}`]}`}>
+                                {capitalizeFirstLetter(task.status)}
+                            </span>
                             {task.title}
                         </h3>
                         <p>{task.description}</p>
@@ -67,17 +71,22 @@ const TasksList = ({ tasks, isLoading, error, onUpdateTask, onDeleteTask }: Task
             </article>
         )
     } else {
-        taskList = <h2>No tasks at the moment. Start adding some tasks!</h2>
+        taskList = <h2>No results found on your search.</h2>
     }
 
-    let content = taskList
-
-    if (error) {
-        content = <p>{error}</p>
-    }
+    let content
 
     if (isLoading) {
-        content = <p>"Loading tasks..."</p>
+        content = <Spinner />
+    } else if (error) {
+        content = <p>{error}</p>
+    } else if (tasks.length === 0) {
+        content = <div>
+            <h2>No tasks at the moment.</h2>
+            <p>To add a new task, fill up the form on the right.</p>
+        </div>
+    } else {
+        content = taskList
     }
 
     return (
