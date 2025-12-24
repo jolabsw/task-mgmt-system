@@ -26,8 +26,8 @@ class TaskFactory extends Factory
     public function definition(): array
     {
          return [
-            'title' => $this->faker->sentence(3),
-            'description' => $this->faker->paragraph(),
+            'title' => $this->faker->words(3, true),
+            'description' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
             'status' => $this->faker->randomElement(['pending', 'in progress', 'completed']),
             'created_at' => now(),
             'updated_at' => now(),
