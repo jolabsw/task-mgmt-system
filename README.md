@@ -101,9 +101,18 @@ To further improve this application, the following tasks should be completed:
 - Deploy the application to a free hosting server
 - Create and add test files
 
+
 ## Screenshots
+- Sample with empty data
 <img width="2880" height="1592" alt="TMS - Sample Empty Data" src="https://github.com/user-attachments/assets/c72a8279-b1c9-44c1-bed4-72587b703e51" />
+
+- Sample with data
 <img width="2880" height="3854" alt="TMS - Sample With Data" src="https://github.com/user-attachments/assets/311a3ee2-8499-4169-96d4-6bbdebfb4183" />
+
+- Sample Walkthrough
+
+https://github.com/user-attachments/assets/393fbc1a-81e4-4fc2-b48f-9fb6a3478148
+
 
 ## That's all!
 Thank you for checking out the Task Management System! If you encounter any issues or have any questions, feel free to open an issue on GitHub or contact me via my personal email.
