@@ -1,0 +1,20 @@
+.task-form h2 {
+    font-size: 1rem;
+}
+
+.task-form .form-group {
+    margin-bottom: 0.625rem;
+}
+
+.task-form .form-group > label {
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.task-form .form-actions {
+    margin-top: 1.25rem;
+}
+
+.task-form .form-actions button {
+    margin-right: 0.313rem;
+}

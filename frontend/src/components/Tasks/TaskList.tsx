@@ -1,0 +1,109 @@
+import { useEffect, useMemo, useState } from "react"
+import type { Task } from "../../types/tasks"
+import DeleteTaskModal from "./DeleteTaskModal"
+import EditTaskModal from "./EditTaskModal"
+
+import styles from "./TaskList.module.css"
+import Spinner from "../UI/Spinner"
+import { capitalizeFirstLetter } from "../../utils/utils"
+
+interface TasksProps {
+    tasks: Task[]
+    isLoading: boolean
+    error: string | null,
+    onUpdateTask: (updatedTask: Task) => void
+    onDeleteTask: (deletedTask: number) => void
+}
+
+const TasksList = ({ tasks, isLoading, error, onUpdateTask, onDeleteTask }: TasksProps) => {
+    const [searchTerm, setSearchTerm] = useState("")
+    const [debouncedTerm, setDebouncedTerm] = useState("")
+
+    // Update debouncedTerm after user stops
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedTerm(searchTerm)
+        }, 400)
+
+        return () => clearTimeout(handler) // clear timeout if typing continues
+    }, [searchTerm])
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value)
+    }
+
+    // Filter tasks based on debounced search term
+    const filteredTasks = useMemo(() => {
+        if (!debouncedTerm.trim()) return tasks // empty search returns all
+
+        const term = debouncedTerm.trim().toLowerCase()
+
+        return tasks.filter((task) => {
+            const title = task.title?.toLowerCase().trim() || ""
+            const description = task.description?.toLowerCase().trim() || ""
+            const status = task.status?.toLowerCase().trim() || ""
+
+            return title.includes(term) || description.includes(term) || status.includes(term);
+        });
+    }, [tasks, debouncedTerm]);
+
+    let taskList
+    if (filteredTasks.length > 0) {
+        taskList = (
+            <article>
+                {filteredTasks.map(task => (
+                    <div key={task.id} className={styles["task-list-item"]}>
+                        <h3>
+                            <span 
+                                className={`${styles.badge} ${styles[`badge-${task.status.replace(/\s+/g, '')}`]}`}>
+                                {capitalizeFirstLetter(task.status)}
+                            </span>
+                            {task.title}
+                        </h3>
+                        <p>{task.description}</p>
+                        <div className={styles["task-list-actions"]}>
+                            <EditTaskModal task={task} onUpdateTask={onUpdateTask} />
+                            <DeleteTaskModal task={task} onDeleteTask={onDeleteTask} />
+                        </div>
+                    </div>
+                )
+                )}
+            </article>
+        )
+    } else {
+        taskList = <h2>No results found on your search.</h2>
+    }
+
+    let content
+
+    if (isLoading) {
+        content = <Spinner />
+    } else if (error) {
+        content = <p>{error}</p>
+    } else if (tasks.length === 0) {
+        content = <div>
+            <h2>No tasks at the moment.</h2>
+            <p>To add a new task, fill up the form on the right.</p>
+        </div>
+    } else {
+        content = taskList
+    }
+
+    return (
+        <section className={styles["task-list"]}>
+            <div className={styles["task-list-top"]}>
+                <h2>Task List</h2>
+                <input
+                    id="search"
+                    type="text"
+                    placeholder="Search tasks here..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                />
+            </div>
+            {content}
+        </section>
+    )
+}
+
+export default TasksList

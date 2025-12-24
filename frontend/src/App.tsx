@@ -1,33 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
+import useHttp from "./hooks/use-http"
+import type { Task } from "./types/tasks"
 
-function App() {
-  const [count, setCount] = useState(0)
+import Header from "./components/Header/Header"
+import NewTask from "./components/Tasks/NewTask"
+import TasksList from "./components/Tasks/TaskList"
+
+const App = () => {
+  const [tasks, setTasks] = useState<Task[]>([])
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp<Task[]>()
+
+  useEffect(() => {
+    const assignTasks = (taskData: Task[]) => {
+      setTasks(taskData)
+    }
+
+    fetchTasks({
+      url: "http://localhost:8000/api/v1/tasks"
+    }, assignTasks)
+  }, [])
+
+  const addTaskHandler = (task: any) => {
+    setTasks((prevTasks) => [task, ...prevTasks]);
+  }
+
+  const updateTaskHandler = (updatedTask: Task) => {
+    setTasks((prevTasks) => {
+      // Check for current tasks and place it on top
+      const remainingTasks = prevTasks.filter((task) => task.id !== updatedTask.id);
+      return [updatedTask, ...remainingTasks];
+    })
+  }
+
+  const deleteTaskHandler = (taskId: number) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <main>
+        <NewTask onAddTask={addTaskHandler} />
+        <TasksList
+          tasks={tasks}
+          isLoading={isLoading}
+          error={error}
+          onUpdateTask={updateTaskHandler}
+          onDeleteTask={deleteTaskHandler}
+        />
+      </main>
     </>
   )
 }

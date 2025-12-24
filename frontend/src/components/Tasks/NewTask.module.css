@@ -1,0 +1,13 @@
+.new-task-container {
+    width: 16rem;
+    padding: 1.25rem;
+    border-right: 1px solid #483c32;
+}
+
+@media screen and (max-width: 768px) {
+    .new-task-container {
+        width: auto;
+        border-right: 0;
+        border-bottom: 1px solid #483c32;
+    }
+}

@@ -12,7 +12,10 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return TaskResource::collection(Task::all());
+        return TaskResource::collection(
+            Task::orderBy('updated_at', 'desc')->get()
+        );
+
     }
 
     public function store(TaskRequest $request)
@@ -21,7 +24,7 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
-    public function update(UpdateTodoRequest $request, $id)
+    public function update(TaskRequest $request, $id)
     {
         $task = Task::findOrFail($id);
         $task->update($request->validated());
