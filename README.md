@@ -43,10 +43,11 @@ docker compose up
 ```
 
 **Step 7:** Run Database Migrations from Docker
-Once all Docker containers are running, access the Laravel application container and run the database migrations.
+Once all Docker containers are running, access the Laravel application container, install composer and run the database migrations.
 Make sure you are still in the **backend** directory, and open a new terminal window.
 ```
 docker compose exec app /bin/bash
+composer install
 php artisan migrate:fresh
 ```
 
