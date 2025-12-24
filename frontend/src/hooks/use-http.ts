@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import type { ApiResponse, RequestConfig } from "../types/api";
+import { useState, useCallback } from "react"
+import type { ApiResponse, RequestConfig } from "../types/api"
 
 const useHttp = <T>() => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
