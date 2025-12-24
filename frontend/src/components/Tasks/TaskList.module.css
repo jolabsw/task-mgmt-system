@@ -4,6 +4,20 @@
     background-color: #fffdf7;
 }
 
+.task-list .task-list-top {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.625rem 0 1.25rem;
+}
+
+.task-list .task-list-top > h2 {
+    margin: 0;
+}
+
+.task-list .task-list-top > input {
+    width: 10rem;
+}
+
 .task-list h2 {
     font-size: 1rem;
 }

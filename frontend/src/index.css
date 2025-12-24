@@ -27,7 +27,7 @@ h1,
 h2,
 h3,
 h4 {
-  margin: 0.625rem auto;
+  margin: 0.625rem 0;
 }
 
 main {
@@ -63,4 +63,23 @@ main {
   border: 1px solid #483c32;
   color: #483c32;
   background-color: #efdfbb;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    margin: 0;
+    padding: 0.313rem;
+    border: 0.063rem solid #483c32;
+    border-radius: 0.188rem;
+    font-size: 0.75rem;
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #8cbed6;
+  background-color: #fffdf7;
 }
