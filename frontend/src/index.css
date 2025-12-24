@@ -43,6 +43,12 @@ main {
   color: red;
 }
 
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+}
+
 /* Forms CSS
 ------------------------------------------------- */
 .btn {
