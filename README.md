@@ -10,7 +10,10 @@ Before you begin, ensure you have the following installed:
 This application uses Docker to set up and manage all necessary services for the backend.
 
 ## Installation
-Follow these steps to set up the project locally for development:
+Follow these steps to set up the project locally for development.
+
+Or you may watch this video for step by step installation walkthrough:
+https://drive.google.com/file/d/1QJd6rP1mbf0aC7ZlnYfCe5MnH3LBSSPs/view?usp=sharing
 
 **Step 1:** Clone the repository
 ```
@@ -97,6 +100,10 @@ Ensure that the React development server is running by visiting [http://localhos
 To further improve this application, the following tasks should be completed:
 - Deploy the application to a free hosting server
 - Create and add test files
+
+## Screenshots
+<img width="2880" height="1592" alt="TMS - Sample Empty Data" src="https://github.com/user-attachments/assets/c72a8279-b1c9-44c1-bed4-72587b703e51" />
+<img width="2880" height="3854" alt="TMS - Sample With Data" src="https://github.com/user-attachments/assets/311a3ee2-8499-4169-96d4-6bbdebfb4183" />
 
 ## That's all!
 Thank you for checking out the Task Management System! If you encounter any issues or have any questions, feel free to open an issue on GitHub or contact me via my personal email.
