@@ -1,0 +1,36 @@
+.task-list {
+    flex: 1 1 0;
+    padding: 1.25rem;
+    background-color: #fffdf7;
+}
+
+.task-list h2 {
+    font-size: 1rem;
+}
+
+.task-list .task-list-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+    padding: 0.625rem;
+    border: 1px solid #483c32;
+    box-shadow: rgba(99, 99, 99, 0.6) 2px 3px 8px 0;
+}
+
+.task-list .task-list-item:hover {
+    background-color: rgba(239, 223, 187, 0.4);
+}
+
+.task-list .task-list-item > h3 {
+    margin: 0.188rem 0;
+    font-size: 0.75rem;
+}
+
+.task-list .task-list-item p {
+    font-size: 0.75rem;
+    margin-top: 0 ;
+}
+
+.task-list .task-list-actions button {
+    margin-right: 0.313rem;
+}

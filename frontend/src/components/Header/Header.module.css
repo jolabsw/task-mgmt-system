@@ -1,0 +1,18 @@
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    width: calc(100% - 2.5rem);
+    margin: 0.625rem auto 0;
+    padding: 1.25rem;
+    border-radius: 0 0 1rem 1rem;
+    background-color: #ffffff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1rem;
+}

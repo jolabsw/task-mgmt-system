@@ -1,5 +1,7 @@
+/* General CSS
+------------------------------------------------- */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, Avenir, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -9,13 +11,52 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  font-size: 1rem;
+  background: linear-gradient(to right, #483c32 50%, #efdfbb 50%);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1,
+h2,
+h3,
+h4 {
+  margin: 0.625rem auto;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  width: calc(100% - 4rem);
+  margin: -0.313rem auto 1.25rem;
+  border: 1px solid #483c32;
+  background-color: #efdfbb;
+}
+
+/* Forms CSS
+------------------------------------------------- */
+.btn {
+  padding: 0.313rem 0.625rem;
+  border: 1px solid #9f8170;
+  border-radius: 0.188rem;
+  font-size: 0.75rem;
+  color: #ffffff;
+  background-color: #483c32;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn.btn-secondary {
+  border: 1px solid #483c32;
+  color: #483c32;
+  background-color: #efdfbb;
 }

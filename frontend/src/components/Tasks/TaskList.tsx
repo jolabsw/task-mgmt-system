@@ -1,25 +1,51 @@
 import type { Tasks } from "../../types/tasks"
 
+import styles from "./TaskList.module.css"
+
 interface TasksProps {
     tasks: Tasks[]
+    isLoading: boolean
+    error: string | null
 }
 
-const TasksList = ({ tasks }: TasksProps) => {
-    return (
-        <section>
-            <h2>Current Tasks</h2>
-            <ul>
+const TasksList = ({ tasks, isLoading, error }: TasksProps) => {
+    let taskList = <h2>No tasks at the moment. Start adding some tasks!</h2>
+
+    if (tasks.length > 0) {
+        taskList = (
+            <article>
                 {tasks.map(task => (
-                    <li key={task.id}>
-                        <h3>{task.title}</h3>
+                    <div key={task.id} className={styles["task-list-item"]}>
+                        <h3>
+                            <span>{task.status}</span>
+                            {task.title}
+                        </h3>
                         <p>{task.description}</p>
-                        <p>{task.status}</p>
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </li>
+                        <div className={styles["task-list-actions"]}>
+                            <button className="btn btn-secondary">Edit</button>
+                            <button className="btn">Delete</button>
+                        </div>
+                    </div>
                 )
                 )}
-            </ul>
+            </article>
+        )
+    }
+
+    let content = taskList
+
+    if (error) {
+        content = <p>{error}</p>
+    }
+
+    if (isLoading) {
+        content = <p>"Loading tasks..."</p>
+    }
+
+    return (
+        <section className={styles["task-list"]}>
+            <h2>Task List</h2>
+            {content}
         </section>
     )
 }
