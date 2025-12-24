@@ -39,6 +39,10 @@ main {
   background-color: #efdfbb;
 }
 
+.error {
+  color: red;
+}
+
 /* Forms CSS
 ------------------------------------------------- */
 .btn {

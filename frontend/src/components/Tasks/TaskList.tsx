@@ -1,14 +1,18 @@
-import type { Tasks } from "../../types/tasks"
+import type { Task } from "../../types/tasks"
+import DeleteTaskModal from "./DeleteTaskModal"
+import EditTaskModal from "./EditTaskModal"
 
 import styles from "./TaskList.module.css"
 
 interface TasksProps {
-    tasks: Tasks[]
+    tasks: Task[]
     isLoading: boolean
-    error: string | null
+    error: string | null,
+    onUpdateTask: (updatedTask: Task) => void
+    onDeleteTask: (deletedTask: number) => void
 }
 
-const TasksList = ({ tasks, isLoading, error }: TasksProps) => {
+const TasksList = ({ tasks, isLoading, error, onUpdateTask, onDeleteTask }: TasksProps) => {
     let taskList = <h2>No tasks at the moment. Start adding some tasks!</h2>
 
     if (tasks.length > 0) {
@@ -22,8 +26,8 @@ const TasksList = ({ tasks, isLoading, error }: TasksProps) => {
                         </h3>
                         <p>{task.description}</p>
                         <div className={styles["task-list-actions"]}>
-                            <button className="btn btn-secondary">Edit</button>
-                            <button className="btn">Delete</button>
+                            <EditTaskModal task={task} onUpdateTask={onUpdateTask} />
+                            <DeleteTaskModal task={task} onDeleteTask={onDeleteTask} />
                         </div>
                     </div>
                 )

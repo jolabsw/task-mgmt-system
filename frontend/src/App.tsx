@@ -20,19 +20,33 @@ const App = () => {
     }, assignTasks)
   }, [])
 
-  const handleAddTask = (task: any) => {
+  const addTaskHandler = (task: any) => {
     setTasks((prevTasks) => [task, ...prevTasks]);
+  }
+
+  const updateTaskHandler = (updatedTask: Task) => {
+    setTasks((prevTasks) => {
+      // Check for current tasks and place it on top
+      const remainingTasks = prevTasks.filter((task) => task.id !== updatedTask.id);
+      return [updatedTask, ...remainingTasks];
+    })
+  }
+
+  const deleteTaskHandler = (taskId: number) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   }
 
   return (
     <>
       <Header />
       <main>
-        <NewTask onAddTask={handleAddTask} />
+        <NewTask onAddTask={addTaskHandler} />
         <TasksList
           tasks={tasks}
           isLoading={isLoading}
-          error={error} 
+          error={error}
+          onUpdateTask={updateTaskHandler}
+          onDeleteTask={deleteTaskHandler}
         />
       </main>
     </>
