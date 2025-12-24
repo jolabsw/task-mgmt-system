@@ -12,7 +12,10 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return TaskResource::collection(Task::all());
+        return TaskResource::collection(
+            Task::orderBy('created_at', 'desc')->get()
+        );
+
     }
 
     public function store(TaskRequest $request)

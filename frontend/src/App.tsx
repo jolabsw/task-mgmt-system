@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
 import useHttp from "./hooks/use-http"
-import type { Tasks } from "./types/tasks"
+import type { Task } from "./types/tasks"
 
 import Header from "./components/Header/Header"
-import AddTask from "./components/Tasks/AddTask"
+import NewTask from "./components/Tasks/NewTask"
 import TasksList from "./components/Tasks/TaskList"
 
-function App() {
-  const [tasks, setTasks] = useState<Tasks[]>([])
-  const { isLoading, error, sendRequest: fetchTasks } = useHttp<Tasks[]>()
+const App = () => {
+  const [tasks, setTasks] = useState<Task[]>([])
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp<Task[]>()
 
   useEffect(() => {
-    const assignTasks = (taskData: Tasks[]) => {
+    const assignTasks = (taskData: Task[]) => {
       setTasks(taskData)
     }
 
@@ -20,11 +20,15 @@ function App() {
     }, assignTasks)
   }, [])
 
+  const handleAddTask = (task: any) => {
+    setTasks((prevTasks) => [task, ...prevTasks]);
+  }
+
   return (
     <>
       <Header />
       <main>
-        <AddTask />
+        <NewTask onAddTask={handleAddTask} />
         <TasksList
           tasks={tasks}
           isLoading={isLoading}

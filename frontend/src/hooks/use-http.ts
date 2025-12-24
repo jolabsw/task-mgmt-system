@@ -18,7 +18,6 @@ const useHttp = <T>() => {
                     method: requestConfig.method ?? "GET",
                     headers: requestConfig.headers ?? {},
                     body: requestConfig.body ?? null
-
                 })
 
                 if (!response.ok) {
