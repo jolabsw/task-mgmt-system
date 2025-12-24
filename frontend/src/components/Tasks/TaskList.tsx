@@ -43,9 +43,9 @@ const TasksList = ({ tasks, isLoading, error, onUpdateTask, onDeleteTask }: Task
             const description = task.description?.toLowerCase().trim() || ""
             const status = task.status?.toLowerCase().trim() || ""
 
-            return title.includes(term) || description.includes(term) || status.includes(term);
-        });
-    }, [tasks, debouncedTerm]);
+            return title.includes(term) || description.includes(term) || status.includes(term)
+        })
+    }, [tasks, debouncedTerm])
 
     let taskList
     if (filteredTasks.length > 0) {

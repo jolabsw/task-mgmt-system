@@ -1,19 +1,19 @@
-import { useState } from "react";
-import Modal from "../UI/Modal";
-import useHttp from "../../hooks/use-http";
-import type { Task } from "../../types/tasks";
+import { useState } from "react"
+import Modal from "../UI/Modal"
+import useHttp from "../../hooks/use-http"
+import type { Task } from "../../types/tasks"
 
 interface DeleteTaskModalProps {
-    task: Task;
-    onDeleteTask: (taskId: number) => void;
+    task: Task
+    onDeleteTask: (taskId: number) => void
 }
 
 const DeleteTaskModal = ({ task, onDeleteTask }: DeleteTaskModalProps) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const { isLoading, error, sendRequest: sendDeleteRequest } = useHttp<void>();
+    const [isOpen, setIsOpen] = useState(false)
+    const { isLoading, error, sendRequest: sendDeleteRequest } = useHttp<void>()
 
-    const openHandler = () => setIsOpen(true);
-    const closeHandler = () => setIsOpen(false);
+    const openHandler = () => setIsOpen(true)
+    const closeHandler = () => setIsOpen(false)
 
     const confirmDeleteHandler = () => {
         sendDeleteRequest(
@@ -22,11 +22,11 @@ const DeleteTaskModal = ({ task, onDeleteTask }: DeleteTaskModalProps) => {
                 method: "DELETE",
             },
             () => {
-                onDeleteTask(task.id);
-                closeHandler();
+                onDeleteTask(task.id)
+                closeHandler()
             }
-        );
-    };
+        )
+    }
 
     return (
         <>
@@ -47,7 +47,7 @@ const DeleteTaskModal = ({ task, onDeleteTask }: DeleteTaskModalProps) => {
                 </div>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default DeleteTaskModal;
+export default DeleteTaskModal

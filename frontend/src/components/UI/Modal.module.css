@@ -21,15 +21,19 @@
   position: relative;
 }
 
-.title {
+.modal-title {
   margin: 0 0 1rem 0;
 }
 
-.content {
+.modal-content {
   margin-bottom: 1rem;
 }
 
-.actions {
+.modal-content button {
+  margin-right: 0.313rem;
+}
+
+.modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;

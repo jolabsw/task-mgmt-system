@@ -1,8 +1,8 @@
-import type { Task } from "../../types/tasks";
-import styles from "./TaskForm.module.css";
+import type { Task } from "../../types/tasks"
+import styles from "./TaskForm.module.css"
 
 interface TaskFormProps {
-    task?: Task; // to be used for editing
+    task?: Task // to be used for editing
     isEditing?: boolean
     onSubmit: (taskData: Omit<Task, "id">) => void
     isLoading?: boolean
